@@ -8,7 +8,7 @@ function authorize(roles = []) {
     // roles param can be a single role string (e.g. Role. User or 'User')
     // or an array of roles (e.g. [Role.Admin, Role. User] or ['Admin', 'User'])
     if (typeof roles === 'string') {
-    roles = [roles];
+        roles = [roles];
     }
 
     return [
@@ -19,9 +19,9 @@ function authorize(roles = []) {
     async (req, res, next) => {
         const account = await db.Account.findByPk(req.user.id);
 
-        if (!account || (roles.length && !roles.includes (account.role))) {
+        if (!account || (roles.length && !roles.includes(account.role))) {
             // account no longer exists or role not authorized
-            return res.status(401).json({message: 'Unauthorized' });
+            return res.status(401).json({ message: 'Unauthorized' });
         }
 
         // authentication and authorization successful
